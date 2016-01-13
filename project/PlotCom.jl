@@ -1,8 +1,9 @@
 ###########################################
-#  This mudule is for plot
+#  This module is for plot
 #  Author: wangjiechao and hanpeiqin
 #  Date: 2015.12.21
 #  Version: 1.0
+###########################################
 
 function PlotCom(range,p1,y3,x3)
   N1=1000;

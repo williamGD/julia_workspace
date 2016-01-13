@@ -1,8 +1,9 @@
 ###########################################
-#  This mudule is for 4/5Runge Kutta Method
+#  This module is for 4/5 Runge Kutta Method
 #  Author: wangjiechao and hanpeiqin
 #  Date: 2015.12.21
 #  Version: 1.0
+###########################################
 
 #################Coefficence############################
   A    =[0             0             0             0             0             0            0;
@@ -20,6 +21,8 @@
 #  enorm is erro 2 norm
 #  Date: 2015.12.21
 #  Version: 1.0
+###########################################
+
 function erro_contral(n,h,ynew,znew,yi,TOL,ATOL)
 #################error contral#########################
            e=zeros(Float64,n,1);
@@ -34,6 +37,7 @@ end
 #  This function is for processing dicontinuous change
 #  Date: 2015.12.21
 #  Version: 1.0
+###########################################
 function RK2A4(f,yi,ti,y,t)
     EPS=eps(Float64);
 
@@ -63,17 +67,18 @@ end
 #  This function is our RK45 about the model
 #  Date: 2015.12.21
 #  Version: 1.0
+###########################################
 function OURRK45(f,x0,T,hinit::Float64,TOL,ATOL)
 
   y=[0];
   t=[0];
   ################init
   n=length(x0);
-  h=hinit;#初始的步长
-  ti=0;#出事的时间点
+  h=hinit;#Init step size
+  ti=0;#Init time
   temph=h;
   EPS=eps(Float64);
-  ynew=x0;#初始的出发点
+  ynew=x0;#start point
   yi=ynew;
   y=[y;ynew[1]];
   t=[t;ynew[2]];
@@ -127,19 +132,4 @@ function OURRK45(f,x0,T,hinit::Float64,TOL,ATOL)
         end
     end####ti<T
    return y,t;
-end
-###########################################
-#  This function is for debug
-#  Date: 2015.12.21
-#  Version: 1.0
-function Myprint(ynew,yi,ti,h)
-     println("ynew's ti:$(ynew[2])");
-     println("yi's   ti:$(yi[2])");
-     println("now    ti:$(ti)");
-     println("h        :$(h)");
-     println("H        :$(ynew[2]-yi[2])");
-     println("\n");
-     println("ynew's height:$(ynew[1])");
-     println("yi's   height:$(yi[1])");
-     println("\n");
 end

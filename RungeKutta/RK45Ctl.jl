@@ -2,25 +2,26 @@
 #  This module is for Runge Kutta by step size contral
 #  Main Fuction : RK45Ctl
 #  Input :f::Function
-#  Output:g::Function
+#         x0    : Init x0
+#         T     : Time
+#         hinit : Init step size
+#         TOL   : Tolerate
+#         ATOL  : Absolute Tolerate
+#  Output:y:x(T)
 #  Author: wangjiechao
 #  Date: 2016.1.13
 #  Version: 1.0
 #################################################
 
 function RK45Ctl(f,x0,T,hinit,TOL,ATOL)
-
-  y=[0];
-  t=[0];
+  t=0;
   ################init
   n=length(x0);
-  h=hinit;#初始的步长
-  ti=0;#出事的时间点
+  h=hinit;#Init step size
+  ti=0;#Init time
 
-  ynew=x0;#初始的出发点
+  ynew=x0;#Init point
   yi=ynew;
-  y=[y;ynew[1]];
-  t=[t;ynew[2]];
   #################Coefficence
   A    =[0             0             0             0             0             0            0;
          1/5           0             0             0             0             0            0;
@@ -69,9 +70,7 @@ function RK45Ctl(f,x0,T,hinit,TOL,ATOL)
         end##end while
    ###################################
            yi=ynew;
-           y=[y;ynew[1]];
-           t=[t;ynew[2]];
     end####ti<T
-return y;
+return yi;
 
 end

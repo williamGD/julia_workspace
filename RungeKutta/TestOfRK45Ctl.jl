@@ -1,5 +1,11 @@
+#################################################
+#  This test is for RK45Ctl
+#  Author: wangjiechao
+#  Date: 2016.1.13
+#  Version: 1.0
+#################################################
+
 include("RK45Ctl.jl")
-Pkg.add(Winston.jl)
 using Winston
 
 function PlotRK45(t,p1,p2)
@@ -18,10 +24,10 @@ function PlotRK45(t,p1,p2)
     y2[i]=p2(x[i]);
   end
   Cur1=Curve(x,y1,color="red");
-  setattr(Cur1,label="x[2]");
+  setattr(Cur1,label="x[1]");
 
   Cur2=Curve(x,y2,color="blue");
-  setattr(Cur2,label="x[1]");
+  setattr(Cur2,label="x[2]");
 
   I=Legend(.1,.9,[Cur1,Cur2]);
 
