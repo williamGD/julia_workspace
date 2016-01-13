@@ -1,3 +1,14 @@
+#################################################
+#  This module is to get the numerical error of
+#  central difference routine for the function
+#  f(x)=x^2+cos(x^2) at x=0 and at x=1 in dependence
+#  of the step size h>0 (use logarithmic axis)
+#  Author: wangjiechao
+#  Date: 2016.1.13
+#  Version: 1.0
+#################################################
+
+
 function Log_NumErr(x,h)
    NumErr=f_d(x,h)-g(x);
    if NumErr<0

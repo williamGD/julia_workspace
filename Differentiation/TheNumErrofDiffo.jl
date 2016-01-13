@@ -1,3 +1,13 @@
+#################################################
+#  This test is to get the numerical error of
+#  central difference routine for the function
+#  f(x)=x^2+cos(x^2) at x=0 and at x=1 in dependence
+#  of the step size h>0 (use logarithmic axis)
+#  Author: wangjiechao
+#  Date: 2016.1.13
+#  Version: 1.0
+#################################################
+
 include("Basic.jl")
 using Gadfly;
 plot1=plot(h->f_d(1,h)-g(1),10.^(-10.),10.^(-1.)

@@ -1,11 +1,17 @@
 ###########################################
 #  This module is for plot
 #  Author: wangjiechao and hanpeiqin
+#  Main Fuction : PlotCom
+#  Input :range
+#         pl::Function
+#         y3
+#         x3
+#  Output:picture
 #  Date: 2015.12.21
 #  Version: 1.0
 ###########################################
 
-function PlotCom(range,p1,y3,x3)
+function PlotCom(range,p1::Function,y3,x3)
   N1=1000;
   x1=linspace(range[1],range[2],N1);
   window=FramedPlot(
@@ -29,8 +35,6 @@ function PlotCom(range,p1,y3,x3)
   setattr(Cur2,label="zero line");
   Point1=Points(x3,y3,kind="fill circle");
   setattr(Point1,label="RK45");
-#  Point2=Points(x4,y4,kind="circle");
-#  setattr(Point2,label="OURRK45");
   I=Legend(.75,.2,[Cur1,Cur2,Point1]);
 
   add(window,Cur1,Cur2,Point1,I);
