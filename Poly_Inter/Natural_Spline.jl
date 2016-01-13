@@ -1,3 +1,15 @@
+#################################################
+#  This module is for Natural spline
+#  Author: wangjiechao
+#  Main Fuction : natural_spline
+#  Input:f::Function
+#        range
+#        N::Int64
+#  Output:
+#        natural spline polynomial
+#  Date: 2016.1.13
+#  Version: 1.0
+#################################################
 
 using Winston
 #define TDMA input coe table
@@ -20,7 +32,7 @@ type TheCoeTabOfNCS
 end
 
 #Tridiagonal Matrix Inversion Algorithms
-function TDMA(T::TheCoeTabOfTDMA,size_N)
+function TDMA(T::TheCoeTabOfTDMA,size_N::Int64)
 
   T.c[1]=T.c[1]/T.b[1];
   T.r[1]=T.r[1]/T.b[1];
@@ -37,7 +49,7 @@ function TDMA(T::TheCoeTabOfTDMA,size_N)
   return T
 end
 
-function TheCoeOfNCS(T::TheCoeTabOfNCS,TheValue,TheCoeCofNCS,h,N)
+function TheCoeOfNCS(T::TheCoeTabOfNCS,TheValue,TheCoeCofNCS,h,N::Int64)
   h1=1/h;
   for TheCurCou in 1:1:N-1
       T.a[TheCurCou]=TheValue[TheCurCou];
@@ -53,14 +65,14 @@ function TheCoeOfNCS(T::TheCoeTabOfNCS,TheValue,TheCoeCofNCS,h,N)
   return T
 end
 
-function natural_spline(f,a,b,N)
+function natural_spline(f::Function,range,N::Int64)
     N=N+1;#include 0
     #
-    x=linspace(a,b,N);
-    h=(b-a)/(N-1);##interval h
+    x=linspace(range[1],range[2],N);
+    h=(range[2]-range[1])/(N-1);##interval h
 
     TheValue=Array(Float64,N);
-    TheValue=[f(i) for i in a:h:b];#The value of f(x)
+    TheValue=[f(i) for i in range[1]:h:range[2]];#The value of f(x)
     #return TheValue
 
     #solve tridiagonal matrix inversion
@@ -82,27 +94,6 @@ function natural_spline(f,a,b,N)
     #return TheTableOfNCS
 
     #output NCS
-    s(z)=TheTableOfNCS.a[floor((z-a)/h)+1]+TheTableOfNCS.b[floor((z-a)/h)+1]*(z-x[floor((z-a)/h)+1])+TheTableOfNCS.c[floor((z-a)/h)+1]*(z-x[floor((z-a)/h)+1])^2+TheTableOfNCS.d[floor((z-a)/h)+1]*(z-x[floor((z-a)/h)+1])^3;
+    s(z)=TheTableOfNCS.a[floor((z-range[1])/h)+1]+TheTableOfNCS.b[floor((z-range[1])/h)+1]*(z-x[floor((z-range[1])/h)+1])+TheTableOfNCS.c[floor((z-range[1])/h)+1]*(z-x[floor((z-range[1])/h)+1])^2+TheTableOfNCS.d[floor((z-range[1])/h)+1]*(z-x[floor((z-range[1])/h)+1])^3;
     return s
-end
-
-function plot1(f,g,r)
-  N=200;
-  x=linspace(r[1],r[2],N);
-  window=FramedPlot(
-                    title="Compare",
-                    xlabel="x",
-                    ylabel="y",
-                    );
-
-  y1=Array(Any,N);
-  y2=Array(Any,N);
-  for i=1:N
-    y1[i]=f(x[i]);
-    y2[i]=g(x[i]);
-  end
-  Cur1=Curve(x,y1,color="red");
-  Cur2=Curve(x,y2,color="blue");
-  add(window,Cur2);
-  add(window,Cur1);
 end

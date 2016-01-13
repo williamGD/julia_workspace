@@ -1,15 +1,13 @@
+#################################################
+#  This test is for Gauss Approximation
+#  Author: wangjiechao
+#  Date: 2016.1.13
+#  Version: 1.0
+#################################################
+
 using Winston
 
-
-p1(x)=1/3+3/5*x;
-p2(x)=3/14+3/5*x+5/14*x^2;
-p3(x)=3/14+5/6*x+5/14*x^2-7/18*x^3;
-f(x)=sqrt(x);
-
-plot1(f,p1,p2,p3,[0,1])
-
-
-function plot1(f,p1,p2,p3,r)
+function plot_2(f,p1,p2,p3,r)
   N=200;
   x=linspace(r[1],r[2],N);
   window=FramedPlot(
@@ -37,10 +35,17 @@ function plot1(f,p1,p2,p3,r)
   Cur3=Curve(x,y3,color="black");
   setattr(Cur3,label="n=2");
 
-  Cur4=Curve(x,y4,color="pink");
+  Cur4=Curve(x,y4,color="green");
   setattr(Cur4,label="n=3");
 
   I=Legend(.1,.9,[Cur1,Cur2,Cur3,Cur4]);
 
   add(window,Cur1,Cur2,Cur3,Cur4,I);
 end
+
+p1(x)=1/3+3/5*x;
+p2(x)=3/14+3/5*x+5/14*x^2;
+p3(x)=3/14+5/6*x+5/14*x^2-7/18*x^3;
+f(x)=sqrt(x);
+
+plot_2(f,p1,p2,p3,[0,1]);

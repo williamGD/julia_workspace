@@ -1,4 +1,5 @@
-include("RK45.jl")
+include("RK45Ctl.jl")
+Pkg.add(Winston.jl)
 using Winston
 
 function PlotRK45(t,p1,p2)
@@ -39,7 +40,7 @@ hinit=0.01;
 w(x)=[x[2]^(3)+sin(x[2]),1];
 xinit=[0;0];
 
-ET1=RK45(w,xinit,T,hinit,TOL1,ATOL1);
+ET1=RK45Ctl(w,xinit,T,hinit,TOL1,ATOL1);
 ###############################################################
 
 
@@ -47,10 +48,10 @@ ET1=RK45(w,xinit,T,hinit,TOL1,ATOL1);
 g(x)=[0 1 0 0 0;0 0 1 0 0;0 0 0 1 0;0 0 0 0 1;0 0 0 0 0]*x;
 x01=[0;0;0;0;1];
 
-T1=RK45(g,x01,T,hinit,TOL1,ATOL1);
-T2=RK45(g,x01,T,hinit,TOL1,ATOL2);
-T3=RK45(g,x01,T,hinit,TOL2,ATOL1);
-T4=RK45(g,x01,T,hinit,TOL3,ATOL1);
+T1=RK45Ctl(g,x01,T,hinit,TOL1,ATOL1);
+T2=RK45Ctl(g,x01,T,hinit,TOL1,ATOL2);
+T3=RK45Ctl(g,x01,T,hinit,TOL2,ATOL1);
+T4=RK45Ctl(g,x01,T,hinit,TOL3,ATOL1);
 TT=[T1 T2 T3 T4];
 ###############################################################
 ##############################EXE3############################
@@ -61,6 +62,6 @@ k4=0.5;
 f(x)=[k1*x[1]-k2*x[1]*x[2];k3*x[1]*x[2]-k4*x[2]];
 x0=[1000;500];
 
-pl1(t)=RK45(f,x0,t,hinit,TOL1,ATOL1)[1];
-pl2(t)=RK45(f,x0,t,hinit,TOL1,ATOL1)[2];
+pl1(t)=RK45Ctl(f,x0,t,hinit,TOL1,ATOL1)[1];
+pl2(t)=RK45Ctl(f,x0,t,hinit,TOL1,ATOL1)[2];
 PlotRK45([0 4],pl1,pl2);

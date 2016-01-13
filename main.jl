@@ -1,7 +1,5 @@
 using Winston
 
-
-
 include("real_orbit.jl")
 include("RK45.jl")
 include("OURRK45.jl")

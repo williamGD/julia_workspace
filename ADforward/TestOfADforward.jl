@@ -1,3 +1,10 @@
+#################################################
+#  This test is for ADforward
+#  Author: wangjiechao
+#  Date: 2016.1.13
+#  Version: 1.0
+#################################################
+
 include("ADforward.jl")
 using Gadfly;
 f(x)=6*cos(x);

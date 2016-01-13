@@ -1,9 +1,13 @@
-###########################################
-#  This mudule is for Algorithmic differentiation
+#################################################
+#  This module is for Algorithmic differentiation
+#  in forward mode
+#  Main Fuction : ADforward
+#  Input :f::Function
+#  Output:g::Function
 #  Author: wangjiechao
 #  Date: 2016.1.13
 #  Version: 1.0
-
+#################################################
 
 import  Base.sin
 import  Base.cos
@@ -15,13 +19,8 @@ type Data
     derivate::Any
 end
 
-function ADforward(f::Function)
-    g(x)=f(Data(x,1)).derivate;
-    return g
-end
-
 ##operator overloading
-##operator
+##operator *
 function *(T1::Data,T2::Data)
   return Data(T1.value*T2.value,T1.value*T2.derivate+T1.derivate*T2.value)
 end
@@ -52,4 +51,9 @@ end
 ##operator cos()
 function cos(T1::Data)
    return Data(cos(T1.value),-T1.derivate*sin(T1.value))
+end
+
+function ADforward(f::Function)
+    g(x)=f(Data(x,1)).derivate;
+    return g
 end
