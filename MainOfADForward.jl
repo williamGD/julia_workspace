@@ -1,5 +1,4 @@
 include("ADforward.jl")
-Pkg.add("Gadfly")
 using Gadfly;
 f(x)=6*cos(x);
 df=ADforward(f);
